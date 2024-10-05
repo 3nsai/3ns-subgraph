@@ -1,0 +1,22 @@
+{
+  "name": "3ns-subgraph",
+  "version": "1.0.2",
+  "author": {
+    "name": "Rafaqat Ali"
+  },
+  "repository": "https://github.com/ensdomains/ens-subgraph",
+  "license": "MIT",
+  "scripts": {
+    "codegen": "graph codegen --output-dir src/types/",
+    "build": "graph build",
+    "deploy": "graph deploy --studio 3ns"
+  },
+  "devDependencies": {
+    "@ensdomains/content-hash": "^2.5.3",
+    "@graphprotocol/graph-cli": "^0.67.2",
+    "@graphprotocol/graph-ts": "^0.31.0",
+    "assemblyscript": "^0.19.0",
+    "matchstick-as": "^0.5.2",
+    "typescript": "^4.9.4"
+  }
+}
