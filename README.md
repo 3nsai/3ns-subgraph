@@ -11,11 +11,11 @@ This document outlines the steps to configure and deploy the ENS Subgraph.
 2. **Specify the Network**
 
    - Modify the `network` field to reflect the network on which your smart contract is deployed. You can find the available network names [here](https://thegraph.com/docs/en/developing/supported-networks/).
-   - Example:
+   - Replace with:
      ```yaml
      network: cli-name
      ```
-     Replace with:
+     Example:
      ```yaml
      network: mbase
      ```
