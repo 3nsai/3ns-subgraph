@@ -1,9 +1,9 @@
 features:
   - ipfsOnEthereumContracts
-  - grafting # feature name
-graft:
-  base: QmaEFADA7KG7EEYHgQN5jkuVgfwuD9uWsbXrtNkSAWqVat # subgraph ID of base subgraph
-  block: 10159700 
+#   - grafting # feature name
+# graft:
+#   base: QmaEFADA7KG7EEYHgQN5jkuVgfwuD9uWsbXrtNkSAWqVat # subgraph ID of base subgraph
+#   block: 10159700 
 specVersion: 0.0.4
 description: >-
   A secure & decentralized way to address resources on and off the blockchain
