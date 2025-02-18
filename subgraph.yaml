@@ -14,11 +14,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: ENSRegistry
-    network: mbase
+    network: arbitrum-sepolia
     source:
-      address: "0x0ab499598a88d391032691EE2D71f13796323224"
+      address: "0xc6e0d25Ff5C44f2dA829E14034201f1f3f2545ab"
       abi: EnsRegistry
-      startBlock: 10836304
+      startBlock: 125001067
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -42,10 +42,10 @@ dataSources:
           handler: handleNewTTL
   - kind: ethereum/contract
     name: Resolver
-    network: mbase
+    network: arbitrum-sepolia
     source:
       abi: Resolver
-      startBlock: 10836304
+      startBlock: 125001067
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -91,11 +91,11 @@ dataSources:
           handler: handleVersionChanged
   - kind: ethereum/contract
     name: BaseRegistrar
-    network: mbase
+    network: arbitrum-sepolia
     source:
-      address: "0x3D14EdC793b4b9dc25A636A8aa025262B2196DBC"
+      address: "0x0A4399505665f0EBFb800BBfFb19767a8AF183A7"
       abi: BaseRegistrar
-      startBlock: 10836319
+      startBlock: 125001206
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -118,11 +118,11 @@ dataSources:
           handler: handleNameTransferred
   - kind: ethereum/contract
     name: EthRegistrarController
-    network: mbase
+    network: arbitrum-sepolia
     source:
-      address: "0xcD53C8aBAa5975aBfc3338c7a1Af5c5780C8de68"
+      address: "0x8751e0398e9A4a75D8db5b9AE0e9996bDa77B18A"
       abi: EthRegistrarController
-      startBlock: 10836445
+      startBlock: 125002519
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -142,11 +142,11 @@ dataSources:
           handler: handleNameRenewedByController
   - kind: ethereum/contract
     name: NameWrapper
-    network: mbase
+    network: arbitrum-sepolia
     source:
-      address: "0x3B2BdaBEe637A6bBF0EB5392Ce8567CE284F8e96"
+      address: "0xD49cb6CbfA55eDC1220E6134C35BF9A7c97dF817"
       abi: NameWrapper
-      startBlock: 10836402
+      startBlock: 125002322
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -172,11 +172,11 @@ dataSources:
           handler: handleTransferBatch
   - kind: ethereum/contract
     name: MetadataService
-    network: mbase
+    network: arbitrum-sepolia
     source:
-      address: "0x2844Dea3d1cB4dba999fd65339ba6c4e294ED48C"
+      address: "0x95725E7dcbf44d1f8156822e2d651d9344c87905"
       abi: MetadataService
-      startBlock: 10836364
+      startBlock: 125001909
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
