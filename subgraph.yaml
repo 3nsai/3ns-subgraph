@@ -16,9 +16,9 @@ dataSources:
     name: ENSRegistry
     network: mbase
     source:
-      address: "0x7C04e8F4aC22ec4E756a7046B9fe170615D39544"
+      address: "0x0ab499598a88d391032691EE2D71f13796323224"
       abi: EnsRegistry
-      startBlock: 9300915
+      startBlock: 10836304
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -45,7 +45,7 @@ dataSources:
     network: mbase
     source:
       abi: Resolver
-      startBlock: 9300975
+      startBlock: 10836304
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -93,9 +93,9 @@ dataSources:
     name: BaseRegistrar
     network: mbase
     source:
-      address: "0xe80CA7f7E9ac34b1E40E50Ce953AA2d9d212Dc49"
+      address: "0x3D14EdC793b4b9dc25A636A8aa025262B2196DBC"
       abi: BaseRegistrar
-      startBlock: 9300932
+      startBlock: 10836319
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -120,9 +120,9 @@ dataSources:
     name: EthRegistrarController
     network: mbase
     source:
-      address: "0x0a88b69d18fd106D8898956BDBf5425B3F83268B"
+      address: "0xcD53C8aBAa5975aBfc3338c7a1Af5c5780C8de68"
       abi: EthRegistrarController
-      startBlock: 9301088
+      startBlock: 10836445
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -144,9 +144,9 @@ dataSources:
     name: NameWrapper
     network: mbase
     source:
-      address: "0x31E9b644eeDD86C286db3C2f7e2B1fDbDA9D7E8E"
+      address: "0x3B2BdaBEe637A6bBF0EB5392Ce8567CE284F8e96"
       abi: NameWrapper
-      startBlock: 9301044
+      startBlock: 10836402
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -174,9 +174,9 @@ dataSources:
     name: MetadataService
     network: mbase
     source:
-      address: "0xEe9a80C1aC00D70DF4Bf5Ab1e49eb71Ee597758B"
+      address: "0x2844Dea3d1cB4dba999fd65339ba6c4e294ED48C"
       abi: MetadataService
-      startBlock: 9301011
+      startBlock: 10836364
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
