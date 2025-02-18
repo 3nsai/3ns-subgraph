@@ -454,6 +454,7 @@ type MetadataRecord @entity {
   # timestamp or blocknumber or txHash or something else
   id: ID!
   URL: String!
+  adp: ADP
   version: String!
   createdAtTimestamp: BigInt!
   createdAtBlockNumber: BigInt!
@@ -465,6 +466,275 @@ type MetadataInfo @entity {
   # version after checking from array
   currentVersion: String!
   currentURL: String!
+  adp: ADP
 
   records: [MetadataRecord!]!
 }
+
+type ADP @entity {
+  # ipfs_hash or url
+  id: ID!
+
+  name: String!
+  did: String!
+  ipfsURI: String!
+
+  spaceId: String
+  nonce: Int
+
+  discovery: Discovery
+}
+
+type Discovery @entity {
+  # ipfs
+  id: ID!
+  adp: ADP!
+  tags: [String!]
+  workflow_descriptors: [KeyValue!]
+  discovery_service: String
+}
+
+type KeyValue @entity {
+  # ipfs
+  id: ID!
+  discovery: Discovery!
+  adp: ADP!
+
+  key: String
+  value: String
+}
+
+# let getIPFSData = ipfs.cat(base58Hash)
+# if (getIPFSData != null) {
+#   let jsonIdentity = json.fromBytes(getIPFSData as Bytes).toObject()
+#   user.schemaId = jsonIdentity.get('schemaId').toString()
+#   user.save()
+# }
+
+# type ADP @entity {
+#     spaceId: this.spaceId, // Identifier for the namespace
+#       name: this.name, // Domain name in lowercase
+#       did: this.did, // Decentralized identifier (DID)
+#       adp_ipfsURI:ipfsURI,
+#       nonce:this.nonce,
+#       # collective: this.domain.collective, // Token and DAO-related metadata
+#       discovery: {
+#         tags: this.domain.discovery.tags, // Tags describing the domain (e.g., name, DID, date, version)
+#         workflow_descriptors: this.domain.discovery.workflow_descriptors, // Workflow descriptors
+#         # discovery_service: this.domain.discovery.discovery_service, // Discovery service URL
+#       },
+#       # chains: this.domain.chains,
+# }
+
+# The schema.graphql file in The Graph defines the structure and types of data that can be queried from a subgraph. It serves as a blueprint for how data is organized and accessed via GraphQL queries. Here are the key components typically found in a schema.graphql file:
+
+# ## Key Components of schema.graphql
+
+# 1. *Object Types*: These represent entities in your application. Each object type can have various fields that define the properties of that entity.
+#    - Example:
+#      graphql
+#      type User @entity {
+#        id: ID!
+#        name: String!
+#        age: Int
+#      }
+
+# 2. *Fields*: Each object type contains fields that specify the data available for that type. Fields can be of scalar types (like String, Int, Boolean, etc.) or other object types.
+#    - Example:
+#      graphql
+#      type Post @entity {
+#        id: ID!
+#        title: String!
+#        content: String
+#        author: User @relation
+#      }
+
+# 3. *Relationships*: You can define relationships between different object types using directives like @relation. This allows for linking entities, such as connecting a post to its author.
+#    - Example:
+#      graphql
+#      type Comment @entity {
+#        id: ID!
+#        content: String!
+#        post: Post @relation
+#      }
+
+# 4. *Queries*: The schema must define a Query type, which specifies the entry points for fetching data. This includes defining queries for retrieving single instances or collections of entities.
+#    - Example:
+#      graphql
+#      type Query {
+#        users(first: Int, skip: Int): [User!]!
+#        posts(first: Int, skip: Int): [Post!]!
+#      }
+
+# 5. *Mutations* (if applicable): If your subgraph supports modifying data, you would also define a Mutation type to handle create, update, and delete operations.
+
+# 6. *Directives*: Directives like @entity are used to annotate types that should be treated as entities by The Graph's indexing system.
+
+# ## Example Schema Structure
+
+# Here’s a simplified example of what a schema.graphql might look like:
+
+# graphql
+# type User @entity {
+#   id: ID!
+#   name: String!
+#   age: Int
+# }
+
+# type Post @entity {
+#   id: ID!
+#   title: String!
+#   content: String
+#   author: User @relation
+# }
+
+# type Query {The schema.graphql file in The Graph defines the structure and types of data that can be queried from a subgraph. It serves as a blueprint for how data is organized and accessed via GraphQL queries. Here are the key components typically found in a schema.graphql file:
+
+# ## Key Components of schema.graphql
+
+# 1. *Object Types*: These represent entities in your application. Each object type can have various fields that define the properties of that entity.
+#    - Example:
+#      graphql
+#      type User @entity {
+#        id: ID!
+#        name: String!
+#        age: Int
+#      }
+
+# 2. *Fields*: Each object type contains fields that specify the data available for that type. Fields can be of scalar types (like String, Int, Boolean, etc.) or other object types.
+#    - Example:
+#      graphql
+#      type Post @entity {
+#        id: ID!
+#        title: String!
+#        content: String
+#        author: User @relation
+#      }
+
+# 3. *Relationships*: You can define relationships between different object types using directives like @relation. This allows for linking entities, such as connecting a post to its author.
+#    - Example:
+#      graphql
+#      type Comment @entity {
+#        id: ID!
+#        content: String!
+#        post: Post @relation
+#      }
+
+# 4. *Queries*: The schema must define a Query type, which specifies the entry points for fetching data. This includes defining queries for retrieving single instances or collections of entities.
+#    - Example:
+#      graphql
+#      type Query {
+#        users(first: Int, skip: Int): [User!]!
+#        posts(first: Int, skip: Int): [Post!]!
+#      }
+
+# 5. *Mutations* (if applicable): If your subgraph supports modifying data, you would also define a Mutation type to handle create, update, and delete operations.
+
+# 6. *Directives*: Directives like @entity are used to annotate types that should be treated as entities by The Graph's indexing system.
+
+# ## Example Schema Structure
+
+# Here’s a simplified example of what a schema.graphql might look like:
+
+# graphql
+# type User @entity {
+#   id: ID!
+#   name: String!
+#   age: Int
+# }
+
+# type Post @entity {
+#   id: ID!
+#   title: String!
+#   content: String
+#   author: User @relation
+# }
+
+# type Query {
+#   users(first: Int, skip: Int): [User!]!
+#   posts(first: Int, skip: Int): [Post!]!
+# }
+
+# In summary, the schema.graphql file is crucial for defining how data is structured and accessed in a subgraph, enabling efficient querying and interaction with the underlying blockchain data.
+#   users(first: Int, skip: Int): [User!]!
+#   posts(first: Int, skip: Int): [Post!]!
+# }
+
+# In summary, the schema.graphql file is crucial for defining how data is structured and accessed in a subgraph, enabling efficient querying and interaction with the underlying blockchain data.
+
+# To represent a collection with key-value pairs in a schema.graphql file for The Graph, you can define an entity that includes a field for attributes, which can be structured as a map or a JSON object. Below is an example of how you might structure such a schema to accommodate key-value pairs.
+
+# ## Example schema.graphql
+
+# ### Scenario: Grocery Store Inventory
+
+# In this example, we will define a Product entity that includes a field called attributes, which will hold key-value pairs representing various product characteristics.
+
+# graphql
+# # Define the Product entity
+# type Product @entity {
+#   id: ID!                # Unique identifier for each product
+#   name: String!         # Name of the product
+#   attributes: JSON      # Key-value pairs representing product attributes
+# }
+
+# # Define the Query type to retrieve products
+# type Query {
+#   products(first: Int, skip: Int): [Product!]!  # Fetch a list of products
+#   product(id: ID!): Product                      # Fetch a single product by ID
+# }
+
+# ### Explanation
+
+# 1. *Product Entity*:
+#    - *id*: A unique identifier for each product, marked with ID! to indicate it is non-nullable.
+#    - *name*: The name of the product, also non-nullable.
+#    - *attributes*: This field is defined as JSON, which allows for storing key-value pairs in a flexible format. You can use this to store various attributes like color, price, category, and quantity.
+
+# 2. *Query Type*:
+#    - *products*: A query that returns an array of Product entities. It supports pagination with first and skip arguments.
+#    - *product*: A query that retrieves a specific product by its unique ID.
+
+# ### Example Usage
+
+# With this schema, you could perform queries like the following:
+
+# #### Fetch All Products
+
+# graphql
+# query {
+#   products(first: 10) {
+#     id
+#     name
+#     attributes
+#   }
+# }
+
+# #### Fetch a Specific Product
+
+# graphql
+# query {
+#   product(id: "1") {
+#     id
+#     name
+#     attributes
+#   }
+# }
+
+# ### Note on JSON Type
+
+# The JSON type is not natively supported in all GraphQL implementations. If your GraphQL server does not support it, you may need to define the attributes as an array of key-value pairs or use a different approach (like defining specific fields for known attributes). Here’s an alternative using an array of key-value pairs:
+
+# graphql
+# type KeyValue {
+#   key: String!
+#   value: String!
+# }
+
+# type Product @entity {
+#   id: ID!
+#   name: String!
+#   attributes: [KeyValue!]!   # Array of key-value pairs
+# }
+
+# This alternative approach allows you to represent dynamic attributes while maintaining compatibility with GraphQL's type system.

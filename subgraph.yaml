@@ -1,3 +1,9 @@
+features:
+  - ipfsOnEthereumContracts
+#   - grafting # feature name
+# graft:
+#   base: QmaEFADA7KG7EEYHgQN5jkuVgfwuD9uWsbXrtNkSAWqVat # subgraph ID of base subgraph
+#   block: 10159700 
 specVersion: 0.0.4
 description: >-
   A secure & decentralized way to address resources on and off the blockchain
@@ -8,11 +14,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: ENSRegistry
-    network: arbitrum-sepolia
+    network: mbase
     source:
-      address: "0xf80f7dD96660041Caa2073cc4544AdCEEe6A70B6"
+      address: "0x7C04e8F4aC22ec4E756a7046B9fe170615D39544"
       abi: EnsRegistry
-      startBlock: 97842312
+      startBlock: 9300915
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -36,10 +42,10 @@ dataSources:
           handler: handleNewTTL
   - kind: ethereum/contract
     name: Resolver
-    network: arbitrum-sepolia
+    network: mbase
     source:
       abi: Resolver
-      startBlock: 9046990
+      startBlock: 9300975
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -85,11 +91,11 @@ dataSources:
           handler: handleVersionChanged
   - kind: ethereum/contract
     name: BaseRegistrar
-    network: arbitrum-sepolia
+    network: mbase
     source:
-      address: "0x017211Cc64F5FA5dbc32be0643Ea6a1328E1E656"
+      address: "0xe80CA7f7E9ac34b1E40E50Ce953AA2d9d212Dc49"
       abi: BaseRegistrar
-      startBlock: 97842614
+      startBlock: 9300932
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -112,11 +118,11 @@ dataSources:
           handler: handleNameTransferred
   - kind: ethereum/contract
     name: EthRegistrarController
-    network: arbitrum-sepolia
+    network: mbase
     source:
-      address: "0x32481e19Bb109577789AcE5DfB56Eb93A4dDDaD0"
+      address: "0x0a88b69d18fd106D8898956BDBf5425B3F83268B"
       abi: EthRegistrarController
-      startBlock: 97843737
+      startBlock: 9301088
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -136,11 +142,11 @@ dataSources:
           handler: handleNameRenewedByController
   - kind: ethereum/contract
     name: NameWrapper
-    network: arbitrum-sepolia
+    network: mbase
     source:
-      address: "0x7C04e8F4aC22ec4E756a7046B9fe170615D39544"
+      address: "0x31E9b644eeDD86C286db3C2f7e2B1fDbDA9D7E8E"
       abi: NameWrapper
-      startBlock: 97843461
+      startBlock: 9301044
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -166,11 +172,11 @@ dataSources:
           handler: handleTransferBatch
   - kind: ethereum/contract
     name: MetadataService
-    network: arbitrum-sepolia
+    network: mbase
     source:
-      address: "0x3bfC6C1936bfbf8D4Aa0f0b5b752f8b6C99366aC"
+      address: "0xEe9a80C1aC00D70DF4Bf5Ab1e49eb71Ee597758B"
       abi: MetadataService
-      startBlock: 97843098
+      startBlock: 9301011
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
