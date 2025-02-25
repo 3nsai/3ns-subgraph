@@ -35,7 +35,8 @@ import {
   Registration,
 } from "./types/schema";
 
-const GRACE_PERIOD_SECONDS = BigInt.fromI32(7776000); // 90 days
+const GRACE_PERIOD_SECONDS = BigInt.fromI32(600); // 90 days
+// const GRACE_PERIOD_SECONDS = BigInt.fromI32(7776000); // 90 days
 
 var rootNode: ByteArray = ByteArray.fromHexString(ETH_NODE);
 
