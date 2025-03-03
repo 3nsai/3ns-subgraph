@@ -56,6 +56,14 @@ function _adp(id: string): ADP {
 
     record.ipfsURI = id;
     record.discovery = id;
+
+    record.adpJSON = default_str;
+    record.identityVersion = default_str;
+    record.paymentsVersion = default_str;
+    record.discoveryVersion = default_str;
+    record.workflowsVersion = default_str;
+    record.data_sourcesVersion = default_str;
+    record.trust_and_reputationVersion = default_str;
   }
 
   return record;
@@ -151,6 +159,7 @@ export function handleMetadataUpdate(event: MetadataUpdate): void {
     let getIPFSData = ipfs.cat(ipfs_url.slice(7));
     if (getIPFSData) {
       let adp = _adp(ipfs_url);
+      adp.adpJSON = getIPFSData.toString();
 
       let root_obj = json.fromBytes(getIPFSData as Bytes).toObject();
 
@@ -183,7 +192,7 @@ export function handleMetadataUpdate(event: MetadataUpdate): void {
         let domainOBJ = domain.toObject();
 
         let discovery = domainOBJ.get("discovery");
-
+        let version = domainOBJ.get("version");
         if (
           discovery &&
           !discovery.isNull() &&
@@ -271,6 +280,76 @@ export function handleMetadataUpdate(event: MetadataUpdate): void {
           }
 
           discovery_e.save();
+        }
+
+        if (
+          version &&
+          !version.isNull() &&
+          version.kind == JSONValueKind.OBJECT
+        ) {
+          let versionOBJ = version.toObject();
+
+          let nonce = versionOBJ.get("nonce");
+          let identity = versionOBJ.get("identity");
+          let discovery = versionOBJ.get("discovery");
+          let trust_and_reputation = versionOBJ.get("trust_and_reputation");
+          let data_sources = versionOBJ.get("data_sources");
+          let payments = versionOBJ.get("payments");
+          let workflows = versionOBJ.get("workflows");
+
+          if (nonce && !nonce.isNull() && nonce.kind == JSONValueKind.NUMBER) {
+            adp.nonce = nonce.toBigInt().toI32();
+          }
+
+          if (
+            identity &&
+            !identity.isNull() &&
+            identity.kind == JSONValueKind.STRING
+          ) {
+            adp.identityVersion = identity.toString();
+          }
+
+          if (
+            discovery &&
+            !discovery.isNull() &&
+            discovery.kind == JSONValueKind.STRING
+          ) {
+            adp.discoveryVersion = discovery.toString();
+          }
+
+          if (
+            trust_and_reputation &&
+            !trust_and_reputation.isNull() &&
+            trust_and_reputation.kind == JSONValueKind.STRING
+          ) {
+            adp.trust_and_reputationVersion = trust_and_reputation.toString();
+          }
+
+          if (
+            data_sources &&
+            !data_sources.isNull() &&
+            data_sources.kind == JSONValueKind.STRING
+          ) {
+            adp.data_sourcesVersion = data_sources.toString();
+          }
+
+          if (
+            payments &&
+            !payments.isNull() &&
+            payments.kind == JSONValueKind.STRING
+          ) {
+            adp.paymentsVersion = payments.toString();
+          }
+
+          if (
+            workflows &&
+            !workflows.isNull() &&
+            workflows.kind == JSONValueKind.STRING
+          ) {
+            adp.workflowsVersion = workflows.toString();
+          }
+
+          adp.save();
         }
       }
     }

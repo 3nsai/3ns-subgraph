@@ -1,5 +1,11 @@
 // Import types and APIs from graph-ts
-import { BigInt, ByteArray, ethereum, log } from "@graphprotocol/graph-ts";
+import {
+  BigInt,
+  ByteArray,
+  Bytes,
+  ethereum,
+  log,
+} from "@graphprotocol/graph-ts";
 import { Account, Domain } from "./types/schema";
 
 export function createEventID(event: ethereum.Event): string {
@@ -108,4 +114,11 @@ export function checkValidLabel(name: string | null): boolean {
   }
 
   return true;
+}
+export function getTxnInputDataToDecode(event: ethereum.Event): Bytes {
+  const inputDataHexString = event.transaction.input.toHexString().slice(10); //take away function signature: '0x????????'
+  const hexStringToDecode =
+    "0x0000000000000000000000000000000000000000000000000000000000000020" +
+    inputDataHexString; // prepend tuple offset
+  return Bytes.fromByteArray(Bytes.fromHexString(hexStringToDecode));
 }

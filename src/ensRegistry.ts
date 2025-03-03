@@ -1,5 +1,5 @@
 // Import types and APIs from graph-ts
-import { BigInt, crypto, ens } from "@graphprotocol/graph-ts";
+import { BigInt, crypto, ens, ethereum } from "@graphprotocol/graph-ts";
 
 import {
   checkValidLabel,
@@ -7,6 +7,8 @@ import {
   createEventID,
   EMPTY_ADDRESS,
   EMPTY_ADDRESS_BYTEARRAY,
+  ETH_NODE_TEXT,
+  getTxnInputDataToDecode,
   ROOT_NODE,
 } from "./utils";
 
@@ -106,14 +108,26 @@ function _handleNewOwner(event: NewOwnerEvent, isMigrated: boolean): void {
     parent.save();
   }
 
+  let decoded = ethereum.decode(
+    "(string,address,uint256,address,bytes[],bool,uint16)",
+    getTxnInputDataToDecode(event)
+  );
+
+  let label: string | null = null;
+
+  if (decoded) {
+    let decodedTuple = decoded.toTuple();
+    label = decodedTuple.at(0).toString();
+  }
+
   if (domain.name == null) {
     // Get label and node names
-    let label = ens.nameByHash(event.params.label.toHexString());
-    if (checkValidLabel(label)) {
-      domain.labelName = label;
-    } else {
-      label = "[" + event.params.label.toHexString().slice(2) + "]";
-    }
+    // let label = ens.nameByHash(event.params.label.toHexString());
+    domain.labelName = label;
+    // if (checkValidLabel(label)) {
+    // } else {
+    //   label = "[" + event.params.label.toHexString().slice(2) + "]";
+    // }
     if (
       event.params.node.toHexString() ==
       "0x0000000000000000000000000000000000000000000000000000000000000000"
@@ -122,6 +136,11 @@ function _handleNewOwner(event: NewOwnerEvent, isMigrated: boolean): void {
     } else {
       parent = parent!;
       let name = parent.name;
+
+      if (!name) {
+        name = ETH_NODE_TEXT;
+      }
+
       if (label && name) {
         domain.name = label + "." + name;
       }

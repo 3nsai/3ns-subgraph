@@ -1,5 +1,12 @@
 // Import types and APIs from graph-ts
-import { BigInt, ByteArray, Bytes, log, store } from "@graphprotocol/graph-ts";
+import {
+  BigInt,
+  ByteArray,
+  Bytes,
+  ethereum,
+  log,
+  store,
+} from "@graphprotocol/graph-ts";
 // Import event types from the registry contract ABI
 import {
   ExpiryExtended as ExpiryExtendedEvent,
@@ -25,6 +32,8 @@ import {
   createOrLoadAccount,
   createOrLoadDomain,
   ETH_NODE,
+  ETH_NODE_TEXT,
+  getTxnInputDataToDecode,
 } from "./utils";
 
 function decodeName(buf: Bytes): Array<string> | null {
@@ -69,13 +78,27 @@ function checkPccBurned(fuses: i32): boolean {
 export function handleNameWrapped(event: NameWrappedEvent): void {
   log.debug("cool {}", [event.params.name.toString()]);
 
-  let decoded = decodeName(event.params.name);
+  let decoded = ethereum.decode(
+    "(string,address,uint256,address,bytes[],bool,uint16)",
+    getTxnInputDataToDecode(event)
+  );
+
   let label: string | null = null;
   let name: string | null = null;
-  if (decoded != null && decoded.length > 1) {
-    label = decoded[0];
-    name = decoded[1];
+
+  if (decoded) {
+    let decodedTuple = decoded.toTuple();
+    label = decodedTuple.at(0).toString();
+    name = label.concat(ETH_NODE_TEXT);
   }
+
+  // let decoded = decodeName(event.params.name);
+  // let label: string | null = null;
+  // let name: string | null = null;
+  // if (decoded != null && decoded.length > 1) {
+  //   label = decoded[0];
+  //   name = decoded[1];
+  // }
   let node = event.params.node;
   let expiryDate = event.params.expiry;
   let fuses = event.params.fuses.toI32();
@@ -84,10 +107,10 @@ export function handleNameWrapped(event: NameWrappedEvent): void {
   let owner = createOrLoadAccount(event.params.owner.toHex());
   let domain = createOrLoadDomain(node.toHex(), event.block.timestamp);
 
-  if (!domain.labelName && label) {
-    domain.labelName = label;
-    domain.name = name;
-  }
+  // if (!domain.labelName && label) {
+  domain.labelName = label;
+  domain.name = name;
+  // }
   if (
     checkPccBurned(fuses) &&
     (!domain.expiryDate || expiryDate > domain.expiryDate!)
