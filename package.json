@@ -7,10 +7,10 @@
   "repository": "https://github.com/ensdomains/ens-subgraph",
   "license": "MIT",
   "scripts": {
-    "auth": "graph auth 9cd49898f246fc5edd71ab059cbbe487",
+    "auth": "graph auth cab4a7c82710d87e9316340866aad1b4",
     "codegen": "graph codegen --output-dir src/types/",
     "build": "graph build",
-    "deploy": "graph deploy 3ns"
+    "deploy": "graph deploy arbitrum-sepolia-v-2"
   },
   "devDependencies": {
     "@ensdomains/content-hash": "^2.5.3",

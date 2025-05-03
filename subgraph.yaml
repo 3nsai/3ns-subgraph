@@ -16,9 +16,9 @@ dataSources:
     name: ENSRegistry
     network: arbitrum-sepolia
     source:
-      address: "0x713fB74467A03d44Aea31BC5d34F8bedE07a34b0"
+      address: "0x712d54D07Dc7E827258c5DBA89e5217fF6D02a87"
       abi: EnsRegistry
-      startBlock: 127262951
+      startBlock: 147365522
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -45,7 +45,7 @@ dataSources:
     network: arbitrum-sepolia
     source:
       abi: Resolver
-      startBlock: 127262951
+      startBlock: 147365522
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -93,9 +93,9 @@ dataSources:
     name: BaseRegistrar
     network: arbitrum-sepolia
     source:
-      address: "0x3D64E8934eE6ED16Ef4572E9bF304413cc07dE13"
+      address: "0x9102C627b2b6c424EeD2da2d8e87E9a992eA67Ec"
       abi: BaseRegistrar
-      startBlock: 127262951
+      startBlock: 147365672
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -120,9 +120,9 @@ dataSources:
     name: EthRegistrarController
     network: arbitrum-sepolia
     source:
-      address: "0x4C82a6E7D50D148561C4E64cBE172CB8A754b946"
+      address: "0xdF5d79c7d01eCec0016D88a69fE359bCf9f92d1f"
       abi: EthRegistrarController
-      startBlock: 127262951
+      startBlock: 147367041
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -144,9 +144,9 @@ dataSources:
     name: NameWrapper
     network: arbitrum-sepolia
     source:
-      address: "0x7e2bEfa30D987aF3afEDa7a47148596881E18476"
+      address: "0xA98fBa4De017f4A5Ae92E4eB29a874A11587Cabb"
       abi: NameWrapper
-      startBlock: 127262951
+      startBlock: 147366646
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -174,9 +174,9 @@ dataSources:
     name: MetadataService
     network: arbitrum-sepolia
     source:
-      address: "0x757F324F5629f2BDdBaa09772FeC7dccc4be23Ac"
+      address: "0xA067d0eca42F26d1a97dbf20CB9847bB3Dd1f1d2"
       abi: MetadataService
-      startBlock: 127262951
+      startBlock: 147366383
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
